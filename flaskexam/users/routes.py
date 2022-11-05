@@ -1,9 +1,9 @@
 from flask import Blueprint, redirect, url_for, flash, request, render_template
 from flask_login import current_user,login_user, login_required, logout_user
-from flaskclass.users.forms import RegisterationForm, LoginForm, UpdateForm, RequestResetForm, ResetPasswordForm
-from flaskclass import db, bcrypt
-from flaskclass.users.utils import save_picture, send_email_reset
-from flaskclass.models import User, Post
+from flaskexam.users.forms import RegisterationForm, LoginForm, UpdateForm, RequestResetForm, ResetPasswordForm
+from flaskexam import db, bcrypt
+from flaskexam.users.utils import save_picture, send_email_reset
+from flaskexam.models import User, Post
 
 
 

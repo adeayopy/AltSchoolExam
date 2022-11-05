@@ -2,7 +2,7 @@ import os, secrets
 from PIL import Image
 from flask import url_for
 from flask_mail import Message
-from flaskclass import app, mail
+from flaskexam import app, mail
 # from flaskclass.users.routes import users
 
 
