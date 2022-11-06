@@ -12,10 +12,10 @@ posts=Blueprint('posts',__name__)
 def new_post():
     form=PostForm()
     if form.validate_on_submit():
-        with posts.app_context():
-            post=Post(title=form.title.data, content=form.post_content.data, author=current_user)
-            db.session.add(post)
-            db.session.commit()
+        # with posts.app_context():
+        post=Post(title=form.title.data, content=form.post_content.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
         flash('Your post has been created','success')
         return redirect(url_for('main.home'))
     return render_template('create_post.html', title="New Post", form=form, legend='New Post')
