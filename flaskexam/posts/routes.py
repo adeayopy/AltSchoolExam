@@ -9,10 +9,11 @@ posts=Blueprint('posts',__name__)
 
 @posts.route('/post/new',methods=['GET','POST'])
 @login_required
+# Functionality for new posts 
 def new_post():
-    form=PostForm()
+    form=PostForm() # Initialize postform
     if form.validate_on_submit():
-        # with posts.app_context():
+        # write data from form to db
         post=Post(title=form.title.data, content=form.post_content.data, author=current_user)
         db.session.add(post)
         db.session.commit()
@@ -27,11 +28,11 @@ def post(post_id):
     post=Post.query.get_or_404(post_id)
     return render_template('post.html', title=post.title, post=post)
 
-
+# Functionality to update post
 @posts.route('/post/<int:post_id>/update',methods=['GET','POST'])
 @login_required
 def update_post(post_id):
-    # with posts.app_context():
+    
     post=Post.query.get_or_404(post_id)
     if post.author!=current_user:
         abort(403)
@@ -46,11 +47,13 @@ def update_post(post_id):
 
         flash('Your post has been updated','success')
         return redirect(url_for('posts.post',post_id=post.id))
+    # Populate field with data 
     elif request.method=='GET':
         form.title.data=post.title
         form.post_content.data=post.content
     return render_template('create_post.html', title="Update Post", form=form, legend='Update Post')
 
+#  FUnctionality to delete post
 @posts.route('/post/<int:post_id>/delete',methods=['POST'])
 @login_required
 def delete_post(post_id):

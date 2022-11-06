@@ -3,7 +3,6 @@ from PIL import Image
 from flask import url_for
 from flask_mail import Message
 from flaskexam import app, mail
-# from flaskclass.users.routes import users
 
 
 def save_picture(form_picture):
@@ -18,6 +17,7 @@ def save_picture(form_picture):
     i.save(picture_path)
     return picture_fn
 
+# For password reset
 def send_email_reset(user):
     token=user.generate_confirmation_token()
     msg=Message('Password Reset Request', sender='noreply@demo.com', recipients=[user.email])

@@ -4,8 +4,8 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flask_login import current_user
 from flaskexam.models import User
-# from flaskclass.users.routes import users
 
+# Registeration form
 class RegisterationForm(FlaskForm):
     username=StringField('Username', 
     validators=[DataRequired(),Length(min=2, max=30) ])
@@ -21,18 +21,19 @@ class RegisterationForm(FlaskForm):
     validators=[DataRequired(), EqualTo('password')])
     submit=SubmitField('Sign up')
 
+    # Validation to prevent repetition in unique (username) fields
     def validate_username(self,username):
-        # app_context():
         user=User.query.filter_by(username=username.data).first()
         if user:
             raise ValidationError('That username is taken, please choose a different one')
 
+    # Validation to prevent repetition in unique (username) fields
     def validate_email(self,email):
-        # with users.app_context():
         user=User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError('That email is taken, please use a different one')
 
+# Login form
 class LoginForm(FlaskForm):
     email=StringField('Email',
     validators=[DataRequired(), Email() ])
@@ -40,7 +41,7 @@ class LoginForm(FlaskForm):
     validators=[DataRequired()])
     remember=BooleanField('Remember me')
     submit=SubmitField('Login')
-
+# Update form
 class UpdateForm(FlaskForm):
     username=StringField('Username', 
     validators=[DataRequired(),Length(min=2, max=30) ])
