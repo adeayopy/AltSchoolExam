@@ -48,6 +48,7 @@ def login():
 def account():
     form=UpdateForm()
     if form.validate_on_submit():
+        
         if form.picture.data:
             picture_file=save_picture(form.picture.data)
             current_user.image_file=picture_file
