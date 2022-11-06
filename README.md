@@ -23,10 +23,10 @@ Linux
 
 Download required dependencies using 
 
-`pip install -r /path/to/requirements.txt`
+`pip install -r requirements.txt`
 
 Run blog using 
 
 `python run.py`
 
-Follow instructions on terminal nto join server
+Follow instructions on terminal to access server
