@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="content-section">
+    <div class="media">
+        <img class="rounded-circle account-img" src="{{profile_picture}}">
+        <div class="media-body">
+            <p class="text-secondary">Username: {{user.username}}</p>
+            <p class="text-secondary">Firstname: {{user.firstname}}</p>
+            <p class="text-secondary">Lastname: {{user.lastname}}</p>
+            <p class="text-secondary">Email: {{user.email}}</p>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}

@@ -18,7 +18,7 @@ def register():
     if form.validate_on_submit():
         hash_password=bcrypt.generate_password_hash(form.password.data).decode()
         # with users.app_context():
-        user=User(username=form.username.data, email=form.email.data, password=hash_password)
+        user=User(username=form.username.data, email=form.email.data, firstname=form.firstname.data, lastname=form.lastname.data,password=hash_password)
         db.session.add(user)
         db.session.commit()
         flash(f"Welcome {form.username.data}! You can now login",'success')
@@ -53,12 +53,17 @@ def account():
             current_user.image_file=picture_file
         current_user.username=form.username.data
         current_user.email=form.email.data
+        current_user.firstname=form.firstname.data
+        current_user.lastname=form.lastname.data
         db.session.commit()
         flash('Your account has been updated','success')
         return redirect(url_for('users.account'))
     elif request.method=='GET':
         form.username.data=current_user.username
         form.email.data=current_user.email
+        form.firstname.data=current_user.firstname
+        form.lastname.data=current_user.lastname
+
     profile_picture=url_for('static', filename='profilepicture/'+current_user.image_file)
     return render_template('account.html', title="Account",profile_picture=profile_picture, form=form)
 
@@ -110,3 +115,12 @@ def reset_token(token):
         flash(f"Your password has been changed",'success')
         return redirect(url_for("users.login"))
     return render_template('reset_token.html', title='Reset Password', form=form)
+
+
+@users.route("/info/<string:username>")
+@login_required
+def info(username):
+
+    user=User.query.filter_by(username=username).first_or_404()
+    profile_picture=url_for('static', filename='profilepicture/'+user.image_file)
+    return render_template('info.html', title="Account Info",profile_picture=profile_picture, user=user)

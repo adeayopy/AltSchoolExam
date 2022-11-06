@@ -9,6 +9,10 @@ from flaskexam.models import User
 class RegisterationForm(FlaskForm):
     username=StringField('Username', 
     validators=[DataRequired(),Length(min=2, max=30) ])
+    firstname=StringField('Firstname', 
+    validators=[DataRequired(),Length(min=2, max=30) ])
+    lastname=StringField('Lastname', 
+    validators=[DataRequired(),Length(min=2, max=30) ])
     email=StringField('Email',
     validators=[DataRequired(), Email() ])
     password=PasswordField('Password',
@@ -42,6 +46,10 @@ class UpdateForm(FlaskForm):
     validators=[DataRequired(),Length(min=2, max=30) ])
     email=StringField('Email',
     validators=[DataRequired(), Email() ])
+    firstname=StringField('Firstname', 
+    validators=[DataRequired(),Length(min=2, max=30) ])
+    lastname=StringField('Lastname', 
+    validators=[DataRequired(),Length(min=2, max=30) ])
     picture=FileField('Update profile picture', validators=[FileAllowed(['jpg','png'])])
     submit=SubmitField('Update')
 
