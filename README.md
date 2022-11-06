@@ -6,7 +6,7 @@ The flaskexam program is a basic blog that allows different users to create, log
 
 ## Requirements
 
-python version  >  3.8.10
+python version  >=  3.8.10
 
 To run program, clone repository, using `git clone https://github.com/adeayopy/AltSchoolExam`
 
