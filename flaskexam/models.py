@@ -9,6 +9,7 @@ def load_user(user_id):
     with app.app_context():
         return User.query.get(int(user_id))
 
+# User model
 class User(db.Model,UserMixin):
     id=db.Column(db.Integer, primary_key=True)
     username=db.Column(db.String(20), unique=True, nullable=False)
@@ -28,7 +29,7 @@ class User(db.Model,UserMixin):
     posts=db.relationship('Post', backref=db.backref('author', lazy='joined'), 
                                 lazy='dynamic')
 
-    
+    # method to generate token for password reset
     def generate_confirmation_token(self, expiration=1800):
         reset_token = jwt.encode(
             {
@@ -40,6 +41,7 @@ class User(db.Model,UserMixin):
             algorithm="HS256"
         )
         return reset_token
+    # method to verify/validate token
     @staticmethod
     def confirm(token):
         try:
@@ -60,7 +62,7 @@ class User(db.Model,UserMixin):
     def __repr__(self) -> str:
         return f"User('{self.username}','{self.email}','{self.image_file}')"
 
-
+# Post model 
 class Post(db.Model):
     id=db.Column(db.Integer, primary_key=True)
     title=db.Column(db.String(100), nullable=False)

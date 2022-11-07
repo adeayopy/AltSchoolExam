@@ -5,6 +5,8 @@ from flask_mail import Message
 from flaskexam import app, mail
 
 
+# Function to randomize profile picture name, reduce its size,
+# save in the static/profilepicture directory and returns the filename to be saved in the db
 def save_picture(form_picture):
     random_hex=secrets.token_hex(8)
     fname,fext=os.path.splitext(form_picture.filename)

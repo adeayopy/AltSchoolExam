@@ -47,7 +47,7 @@ def update_post(post_id):
 
         flash('Your post has been updated','success')
         return redirect(url_for('posts.post',post_id=post.id))
-    # Populate field with data 
+    # Automatically populate field with data 
     elif request.method=='GET':
         form.title.data=post.title
         form.post_content.data=post.content
@@ -57,10 +57,12 @@ def update_post(post_id):
 @posts.route('/post/<int:post_id>/delete',methods=['POST'])
 @login_required
 def delete_post(post_id):
-    with posts.app_context():
-        post=Post.query.get_or_404(post_id)
+    # Query post by id
+    post=Post.query.get_or_404(post_id)
+    # Vheck if it is the writer of the post performing the delete operation. Abort if not
     if post.author!=current_user:
         abort(403)
+    # Delete post from sb
     with posts.app_context():
         db.session.delete(post)
         db.session.commit()

@@ -25,6 +25,10 @@ Download required dependencies using
 
 `pip install -r requirements.txt`
 
+To use the change password feature by users, ensure the environment variable name in __init__.py matches with your environment variable file or pass them as strings directly
+`app.config['MAIL_USERNAME']=os.environ.get('EMAIL')`
+`app.config['MAIL_PASSWORD']=os.environ.get('EMAIL_PASSWORD')`
+
 Run blog using 
 
 `python run.py`
